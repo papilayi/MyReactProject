@@ -9,14 +9,12 @@ class App extends Component  {
     persons: [
       { name: 'PHILZ', age: 12 },
       { name: 'ANU', age: 77 },
-      { name: 'JOEL', age: 7 },
+      { name: 'JOL', age: 7 },
     ],
-    otherState: 'something'
+    showPersons = false
   }
 
   switchNameHandler = (newName) =>{
-    // console.log('it works');
-    // this.state.persons[0].name = 'TIMOTHY';
     this.setState(
     {
       persons: [
@@ -39,18 +37,29 @@ class App extends Component  {
     )
  }
 
+ showPersonsHandler = () =>{
+  const doesShow = this.state.showPersons
+  this.setState({
+    showPersons: !doesShow
+  })
+ }
+
   render() {
+
+    let people = null
+
+    if (this.state.showPersons) {
+      people =<div>
+        <Semilore name = {this.state.persons[0].name} age = {this.state.persons[0].age} />
+      <Semilore name = {this.state.persons[1].name} age = {this.state.persons[1].age} />
+      <Semilore name = {this.state.persons[2].name} age = {this.state.persons[2].age}/>
+        </div>
+      
+    }
   return(
     <div className='Apps'>
       <h1>Hi, I am a React Developer</h1>
-      <Semilore name = {this.state.persons[0].name} age = {this.state.persons[0].age} ></Semilore>
-      <Semilore 
-      changed = {this.nameChangedHandler}
-      clicked = {()=>this.switchNameHandler('PATH')}
-      name = {this.state.persons[1].name} 
-      age = {this.state.persons[1].age} />
-      <Semilore name = {this.state.persons[2].name} age = {this.state.persons[2].age}/>
-      <button onClick = {this.switchNameHandler.bind(this, 'ADUN!!##$$')} >SWITCH NAME</button>
+      <button onClick = {this.showPersonsHandler} >SWITCH NAME</button>
     </div>
   )
 }
