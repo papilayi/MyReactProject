@@ -43,17 +43,30 @@ class App extends Component  {
     showPersons: !doesShow
   })
  }
+ deletePersonHandler = (personIndex) =>{
+  const osas = this.state.persons.splice();
+  osas.splice(personIndex, 1)
+  this.setState({
+    osas: osas
+  })
+ }
 
   render() {
 
     let people = null
 
     if (this.state.showPersons) {
-      people =<div>
-        <Semilore name = {this.state.persons[0].name} age = {this.state.persons[0].age} />
-      <Semilore name = {this.state.persons[1].name} age = {this.state.persons[1].age} />
-      <Semilore name = {this.state.persons[2].name} age = {this.state.persons[2].age}/>
+      people =(
+        <div>
+          {this.state.persons.map((pesin, index) =>{
+            return <Semilore
+            clicked = {()=>this.deletePersonHandler(index)}
+            name = {pesin.name}
+            age = {pesin.age}
+            />
+          })}
         </div>
+      )
       
     }
   return(
